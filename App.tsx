@@ -14,6 +14,7 @@ import { MockFriendsData } from "./data";
 type RootStackParamList = {
   Home: undefined;
   Details: { id: number };
+  Display: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -34,6 +35,17 @@ function resolveImage(imageName: string) {
 }
 
 function HomeScreen({ navigation }: any) {
+  return (
+    <View>
+      <Button
+        title="Go to Display ❤️"
+        onPress={() => navigation.navigate("Display")}
+      ></Button>
+    </View>
+  );
+}
+
+function DisplayFriendsScreen({ navigation }: any) {
   return (
     <ScrollView>
       <Text>Home Screen 🐛</Text>
@@ -56,11 +68,15 @@ function HomeScreen({ navigation }: any) {
           ></Button>
         </View>
       ))}
+      <Button
+        title="Go to Display ❤️"
+        onPress={() => navigation.navigate("Display")}
+      ></Button>
     </ScrollView>
   );
 }
 
-function FriendDetails({ route }: any) {
+function FriendDetailsScreen({ route }: any) {
   const { id } = route.params;
   const friend = MockFriendsData.find((friend) => friend.id === id);
   console.log(friend?.name);
@@ -79,7 +95,8 @@ export default function App() {
     <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Screen name="Home" component={HomeScreen} />
-        <RootStack.Screen name="Details" component={FriendDetails} />
+        <RootStack.Screen name="Details" component={FriendDetailsScreen} />
+        <RootStack.Screen name="Display" component={DisplayFriendsScreen} />
       </RootStack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

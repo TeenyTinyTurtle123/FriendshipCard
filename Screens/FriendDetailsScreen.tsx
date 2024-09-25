@@ -8,14 +8,16 @@ export default function FriendDetailsScreen({ route }: any) {
   console.log(friend?.name);
   return (
     <View>
-      <Text>Friend Details</Text>
       <Text>Friend ID: {id}</Text>
       <Text>Friend Name: {friend?.name}</Text>
-      <Text>Friend relation: {friend?.relation}</Text>
       <Image
         source={resolveImage(friend?.image ?? "default.jpg")}
         style={{ width: 200, height: 200 }}
       />
+      <Text>Friend Details</Text>
+      <Text>Friend relation: {friend?.relation}</Text>
+      <Text>Likes: {friend?.likes.join(" ")}</Text>
+      <Text>Gift ides: {friend?.giftIdea.join(" ")}</Text>
     </View>
   );
 }

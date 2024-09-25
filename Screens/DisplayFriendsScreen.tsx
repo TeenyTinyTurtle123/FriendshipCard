@@ -16,8 +16,7 @@ export default function DisplayFriendsScreen({ navigation }: any) {
             source={resolveImage(friend.image)}
             style={{ width: 100, height: 100 }}
           />
-          <Text>Likes: {friend.likes.join(" ")}</Text>
-          <Text>Gift Ides: {friend.giftIdea.join(" ")}</Text>
+
           <Text></Text>
           <Button
             title={`Details for ${friend.name}`}

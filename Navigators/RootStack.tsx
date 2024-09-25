@@ -1,9 +1,10 @@
+import { NavigatorScreenParams } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FriendDetailsScreen from "../Screens/FriendDetailsScreen";
-import TabNavigator from "./TabNavigator";
+import TabNavigator, { TabParamList } from "./TabNavigator";
 
 type RootStackParamList = {
-  HomeNavigator: undefined;
+  HomeNavigator: NavigatorScreenParams<TabParamList>;
   Details: { id: number };
   //   Display: undefined;
 };

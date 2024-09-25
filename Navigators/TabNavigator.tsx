@@ -3,7 +3,7 @@ import CreateFriend from "../Screens/CreateFriend";
 import DisplayFriendsScreen from "../Screens/DisplayFriendsScreen";
 import HomeScreen from "../Screens/HomeScreen";
 
-type TabParamList = {
+export type TabParamList = {
   Home: undefined;
   Create: undefined;
   Display: undefined;

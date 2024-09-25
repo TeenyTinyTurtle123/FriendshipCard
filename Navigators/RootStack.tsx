@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FriendDetailsScreen from "../Screens/FriendDetailsScreen";
 import TabNavigator, { TabParamList } from "./TabNavigator";
 
-type RootStackParamList = {
+export type RootStackParamList = {
   HomeNavigator: NavigatorScreenParams<TabParamList>;
   Details: { id: number };
   //   Display: undefined;

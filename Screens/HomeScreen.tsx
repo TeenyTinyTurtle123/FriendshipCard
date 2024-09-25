@@ -1,5 +1,4 @@
 import { Button, View } from "react-native";
-import ToDetailsButton from "../components/ToDetailsButton";
 
 export default function HomeScreen({ navigation }: any) {
   return (
@@ -8,7 +7,6 @@ export default function HomeScreen({ navigation }: any) {
         title="Go to Display ❤️"
         onPress={() => navigation.navigate("Display")}
       ></Button>
-      <ToDetailsButton />
     </View>
   );
 }

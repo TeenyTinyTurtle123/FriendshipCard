@@ -1,17 +1,18 @@
 import { Image } from "expo-image";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { MockFriendsData } from "../data";
 
-export default function ToDetailsButton() {
+export default function ToDetailsButton({ friend, navigation }: any) {
   return (
-    <Pressable onPress={() => alert("you pressed me!")}>
+    <Pressable
+      onPress={() => navigation.navigate("Details", { id: friend.id })}
+    >
       <View style={s.container}>
         <Image
           source={require("../assets/images/default.jpg")}
           style={s.image}
           blurRadius={50}
         />
-        <Text style={s.text}>Name</Text>
+        <Text style={s.text}>{friend.name}</Text>
       </View>
     </Pressable>
   );
@@ -19,8 +20,8 @@ export default function ToDetailsButton() {
 
 const s = StyleSheet.create({
   container: {
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     justifyContent: "center",
     alignItems: "center",
   },

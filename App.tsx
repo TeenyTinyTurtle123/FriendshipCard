@@ -1,10 +1,22 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { MockFriendsData } from "./data";
 
-const RootStack = createNativeStackNavigator();
+type RootStackParamList = {
+  Home: undefined;
+  Details: { id: number };
+};
+
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 function resolveImage(imageName: string) {
   switch (imageName) {
@@ -21,9 +33,9 @@ function resolveImage(imageName: string) {
   }
 }
 
-function HomeScreen() {
+function HomeScreen({ navigation }: any) {
   return (
-    <View>
+    <ScrollView>
       <Text>Home Screen 🐛</Text>
       {MockFriendsData.map((friend) => (
         <View>
@@ -38,8 +50,26 @@ function HomeScreen() {
           <Text>Likes: {friend.likes.join(" ")}</Text>
           <Text>Gift Ides: {friend.giftIdea.join(" ")}</Text>
           <Text></Text>
+          <Button
+            title={`Details for ${friend.name}`}
+            onPress={() => navigation.navigate("Details", { id: friend.id })}
+          ></Button>
         </View>
       ))}
+    </ScrollView>
+  );
+}
+
+function FriendDetails({ route }: any) {
+  const { id } = route.params;
+  const friend = MockFriendsData.find((friend) => friend.id === id);
+  console.log(friend?.name);
+  return (
+    <View>
+      <Text>Friend Details</Text>
+      <Text>Friend ID: {id}</Text>
+      <Text>Friend Name: {friend?.name}</Text>
+      <Text>Friend relation: {friend?.relation}</Text>
     </View>
   );
 }
@@ -49,6 +79,7 @@ export default function App() {
     <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Screen name="Home" component={HomeScreen} />
+        <RootStack.Screen name="Details" component={FriendDetails} />
       </RootStack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

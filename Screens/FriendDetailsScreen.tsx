@@ -13,7 +13,7 @@ export default function FriendDetailsScreen({ route }: any) {
       <Text>Friend Name: {friend?.name}</Text>
       <Text>Friend relation: {friend?.relation}</Text>
       <Image
-        source={resolveImage(friend?.image)}
+        source={resolveImage(friend?.image ?? "default.jpg")}
         style={{ width: 200, height: 200 }}
       />
     </View>

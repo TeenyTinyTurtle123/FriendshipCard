@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+import { resolveImage } from "../App";
 import { MockFriendsData } from "../data";
 
 export default function FriendDetailsScreen({ route }: any) {
@@ -11,6 +12,10 @@ export default function FriendDetailsScreen({ route }: any) {
       <Text>Friend ID: {id}</Text>
       <Text>Friend Name: {friend?.name}</Text>
       <Text>Friend relation: {friend?.relation}</Text>
+      <Image
+        source={resolveImage(friend?.image)}
+        style={{ width: 200, height: 200 }}
+      />
     </View>
   );
 }

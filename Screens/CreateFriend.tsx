@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { FriendCard, MockFriendsData } from "../data";
 
 export default function CreateFriend() {
-  const [value, setValue] = useState({
+  const [friendValue, setFriendValue] = useState({
     id: 0,
     name: "",
     relation: "",
@@ -20,20 +21,27 @@ export default function CreateFriend() {
   }
   // handles input changes
   const handleInputChange = (field: string, inputValue: string) => {
-    setValue((startValue) => ({
+    setFriendValue((startValue) => ({
       ...startValue,
       [field]: inputValue, //update only the field (name, relation ...) that has changed
     }));
   };
 
-  function setId() {
+  function handleAddFriend() {
     const id = generateRandomID();
-    setValue((startValue) => ({
-      ...startValue,
-      id,
-    }));
 
-    console.log("Friend data: " + value.id);
+    const newFriend: FriendCard = {
+      ...friendValue,
+      id,
+      likes: friendValue.likes.split(",").map((like) => like.trim()), // convert string to array
+      giftIdea: friendValue.giftIdea.split(",").map((gift) => gift.trim()), // convert string to array
+    };
+
+    MockFriendsData.push(newFriend);
+
+    console.log("Friend data: " + newFriend.name);
+
+    console.log(MockFriendsData);
   }
 
   return (
@@ -44,33 +52,33 @@ export default function CreateFriend() {
       <TextInput
         style={s.textInput}
         onChangeText={(text) => handleInputChange("name", text)}
-        value={value.name} //this is to help sync the state change
+        value={friendValue.name} //this is to help sync the state change
         placeholder="name"
       />
       <Text>Relationship:</Text>
       <TextInput
         style={s.textInput}
         onChangeText={(text) => handleInputChange("relation", text)}
-        value={value.relation}
+        value={friendValue.relation}
         placeholder="friend, brother ..."
       />
-      <Text>Likes (separate each new thing with a ' , '):</Text>
+      <Text>Likes (separate each new thing with a ', '):</Text>
       <TextInput
         style={s.textInput}
         placeholder="green socks, cats, pancakes ..."
         onChangeText={(text) => handleInputChange("likes", text)}
-        value={value.likes}
+        value={friendValue.likes}
       />
       <Text>Gift ideas (separate each new thing with a ' , '):</Text>
       <TextInput
         style={s.textInput}
         onChangeText={(text) => handleInputChange("giftIdea", text)}
-        value={value.giftIdea}
+        value={friendValue.giftIdea}
         placeholder="Trip to Liseberg, limited edition frog  ..."
       />
       <Text>Add a picture (optional)</Text>
       <TextInput placeholder="added in version 2" />
-      <Button title="Add" onPress={setId} />
+      <Button title="Add" onPress={handleAddFriend} />
     </View>
   );
 }

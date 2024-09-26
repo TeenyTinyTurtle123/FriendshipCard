@@ -1,7 +1,7 @@
 export type FriendCard = {
   id: number;
   name: string;
-  image: string;
+  image?: string;
   relation: string;
   likes: string[];
   giftIdea: string[];

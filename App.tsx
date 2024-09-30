@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import RootStackNavigator from "./Navigators/RootStack";
+import FriendProvider from "./components/FriendProvider";
 
 export function resolveImage(imageName: string) {
   switch (imageName) {
@@ -20,10 +21,12 @@ export function resolveImage(imageName: string) {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <StatusBar style="auto" />
-      <RootStackNavigator />
-    </NavigationContainer>
+    <FriendProvider>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <RootStackNavigator />
+      </NavigationContainer>
+    </FriendProvider>
   );
 }
 

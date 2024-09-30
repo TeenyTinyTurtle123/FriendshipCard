@@ -13,7 +13,7 @@ const TabNav = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   return (
-    <TabNav.Navigator>
+    <TabNav.Navigator initialRouteName="Home">
       <TabNav.Screen name="Create" component={CreateFriend} />
       <TabNav.Screen name="Home" component={HomeScreen} />
       <TabNav.Screen name="Display" component={DisplayFriendsScreen} />

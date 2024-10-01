@@ -1,13 +1,18 @@
-import { Image, Text, View } from "react-native";
+import { Alert, Button, Image, Text, View } from "react-native";
 import { resolveImage } from "../App";
 import { useFriendProvider } from "../components/FriendProvider";
 
 export default function FriendDetailsScreen({ route }: any) {
-  const { friendList } = useFriendProvider();
+  const { friendList, removeFriend } = useFriendProvider();
 
   const { id } = route.params;
   const friend = friendList.find((friend) => friend.id === id);
   console.log(friend?.name);
+
+  const handleRemoveFriend = () => {
+    removeFriend(id);
+    Alert.alert(friend?.name + " has been deleted.");
+  };
   return (
     <View>
       <Text>Friend ID: {id}</Text>
@@ -20,6 +25,7 @@ export default function FriendDetailsScreen({ route }: any) {
       <Text>Friend relation: {friend?.relation}</Text>
       <Text>Likes: {friend?.likes.join(" ")}</Text>
       <Text>Gift ides: {friend?.giftIdea.join(" ")}</Text>
+      <Button title="Delete" onPress={() => handleRemoveFriend()} />
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
 import { FriendCard } from "../data";
 
@@ -31,6 +31,7 @@ export default function CreateFriend() {
     };
 
     addFriend(newFriend);
+    Alert.alert(newFriend.name + " was added! ✨");
   };
 
   return (

@@ -1,10 +1,12 @@
 import { Image, Text, View } from "react-native";
 import { resolveImage } from "../App";
-import { MockFriendsData } from "../data";
+import { useFriendProvider } from "../components/FriendProvider";
 
 export default function FriendDetailsScreen({ route }: any) {
+  const { friendList } = useFriendProvider();
+
   const { id } = route.params;
-  const friend = MockFriendsData.find((friend) => friend.id === id);
+  const friend = friendList.find((friend) => friend.id === id);
   console.log(friend?.name);
   return (
     <View>

@@ -1,3 +1,5 @@
+import { Image } from "expo-image";
+import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
@@ -27,11 +29,25 @@ export default function CreateFriend() {
       relation,
       likes: likes.split(",").map((like) => like.trim()), // Convert the likes string into an array
       giftIdea: giftIdeas.split(",").map((gift) => gift.trim()), // Convert the gift ideas string into an array
-      image: image || "default.jpg", // Use a default image if none is provided
+      image: image, // TODO: add a placeholder image if no image is selected
     };
 
     addFriend(newFriend);
     Alert.alert(newFriend.name + " was added! ✨");
+  };
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
   };
 
   return (
@@ -75,6 +91,10 @@ export default function CreateFriend() {
         value={image}
         onChangeText={setImage}
       />
+      <View>
+        <Button title="Open library" onPress={pickImage} />
+        {image && <Image source={{ uri: image }} style={s.image} />}
+      </View>
       <Button title="Add" onPress={handleAddFriend} />
     </View>
   );
@@ -86,5 +106,9 @@ const s = StyleSheet.create({
     borderWidth: 2,
     padding: 5,
     marginBottom: 5,
+  },
+  image: {
+    width: 200,
+    height: 200,
   },
 });

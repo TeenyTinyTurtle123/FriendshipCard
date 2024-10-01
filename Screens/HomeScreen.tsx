@@ -1,4 +1,5 @@
-import { Button, Text, View } from "react-native";
+import { Image } from "expo-image";
+import { Button, ScrollView, Text, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
 import { FriendCard } from "../data";
 
@@ -23,7 +24,7 @@ export default function HomeScreen({ navigation }: any) {
   };
 
   return (
-    <View>
+    <ScrollView>
       <Button
         title="Go to Display ❤️"
         onPress={() => navigation.navigate("Display")}
@@ -35,6 +36,10 @@ export default function HomeScreen({ navigation }: any) {
           <Text>
             {friend.name} {friend.relation} {friend.likes}
           </Text>
+          <Image
+            source={{ uri: friend.image }}
+            style={{ width: 200, height: 200 }}
+          />
           <Button
             title="Remove friend"
             onPress={() => handleRemoveFriend(friend.id)}
@@ -42,6 +47,6 @@ export default function HomeScreen({ navigation }: any) {
         </View>
       ))}
       <Button title="Add new friend" onPress={handleAddAFriend} />
-    </View>
+    </ScrollView>
   );
 }

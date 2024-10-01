@@ -1,48 +1,37 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import { FriendCard, MockFriendsData } from "../data";
+import { useFriendProvider } from "../components/FriendProvider";
+import { FriendCard } from "../data";
 
 export default function CreateFriend() {
-  const [friendValue, setFriendValue] = useState({
-    id: 0,
-    name: "",
-    relation: "",
-    likes: "", //array?
-    giftIdea: "", //array
-    image: "",
-  });
+  const { friendList, addFriend } = useFriendProvider();
 
-  //   a silly little random number function
-  // takes the milliseconds + a random generated number and return a almost uniq number each time
+  // state for form input:
+  const [name, setName] = useState("");
+  const [relation, setRelation] = useState("");
+  const [likes, setLikes] = useState("");
+  const [giftIdeas, seGiftIdeas] = useState("");
+  const [image, setImage] = useState("");
+
+  // Function to generate a unique ID
   function generateRandomID() {
     const timeComponent = Date.now();
     const randomComponent = Math.floor(Math.random() * 100);
     return timeComponent + randomComponent;
   }
-  // handles input changes
-  const handleInputChange = (field: string, inputValue: string) => {
-    setFriendValue((startValue) => ({
-      ...startValue,
-      [field]: inputValue, //update only the field (name, relation ...) that has changed
-    }));
-  };
 
-  function handleAddFriend() {
-    const id = generateRandomID();
-
+  const handleAddFriend = () => {
     const newFriend: FriendCard = {
-      ...friendValue,
-      id,
-      likes: friendValue.likes.split(",").map((like) => like.trim()), // convert string to array
-      giftIdea: friendValue.giftIdea.split(",").map((gift) => gift.trim()), // convert string to array
+      id: generateRandomID(),
+      name,
+      relation,
+      likes: likes.split(",").map((like) => like.trim()), // Convert the likes string into an array
+      giftIdea: giftIdeas.split(",").map((gift) => gift.trim()), // Convert the gift ideas string into an array
+      image: image || "default.jpg", // Use a default image if none is provided
     };
 
-    MockFriendsData.push(newFriend);
-
-    console.log("Friend data: " + newFriend.name);
-
-    console.log(MockFriendsData);
-  }
+    addFriend(newFriend);
+  };
 
   return (
     <View>
@@ -51,33 +40,40 @@ export default function CreateFriend() {
       <Text>Name of person:</Text>
       <TextInput
         style={s.textInput}
-        onChangeText={(text) => handleInputChange("name", text)}
-        value={friendValue.name} //this is to help sync the state change
         placeholder="name"
+        value={name}
+        onChangeText={setName}
       />
-      <Text>Relationship:</Text>
       <TextInput
         style={s.textInput}
-        onChangeText={(text) => handleInputChange("relation", text)}
-        value={friendValue.relation}
         placeholder="friend, brother ..."
+        value={relation}
+        onChangeText={setRelation}
       />
+
       <Text>Likes (separate each new thing with a ', '):</Text>
       <TextInput
         style={s.textInput}
         placeholder="green socks, cats, pancakes ..."
-        onChangeText={(text) => handleInputChange("likes", text)}
-        value={friendValue.likes}
+        value={likes}
+        onChangeText={setLikes}
       />
+
       <Text>Gift ideas (separate each new thing with a ' , '):</Text>
       <TextInput
         style={s.textInput}
-        onChangeText={(text) => handleInputChange("giftIdea", text)}
-        value={friendValue.giftIdea}
         placeholder="Trip to Liseberg, limited edition frog  ..."
+        value={giftIdeas}
+        onChangeText={seGiftIdeas}
       />
+
       <Text>Add a picture (optional)</Text>
-      <TextInput placeholder="added in version 2" />
+      <TextInput
+        style={s.textInput}
+        placeholder="image url"
+        value={image}
+        onChangeText={setImage}
+      />
       <Button title="Add" onPress={handleAddFriend} />
     </View>
   );

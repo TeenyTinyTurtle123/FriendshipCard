@@ -36,10 +36,7 @@ export default function HomeScreen({ navigation }: any) {
           <Text>
             {friend.name} {friend.relation} {friend.likes}
           </Text>
-          <Image
-            source={{ uri: friend.image }}
-            style={{ width: 200, height: 200 }}
-          />
+          <Image source={friend.image} style={{ width: 200, height: 200 }} />
           <Button
             title="Remove friend"
             onPress={() => handleRemoveFriend(friend.id)}

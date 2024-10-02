@@ -2,6 +2,7 @@ import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
 import { FriendCard } from "../data";
 
@@ -29,7 +30,7 @@ export default function CreateFriend() {
       relation,
       likes: likes.split(",").map((like) => like.trim()), // Convert the likes string into an array
       giftIdea: giftIdeas.split(",").map((gift) => gift.trim()), // Convert the gift ideas string into an array
-      image: image, // TODO: add a placeholder image if no image is selected
+      image: image ? { uri: image } : defaultImage, // TODO: add a placeholder image if no image is selected
     };
 
     addFriend(newFriend);

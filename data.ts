@@ -1,4 +1,4 @@
-export type FriendCard = {
+export type Friend = {
   id: number;
   name: string;
   image?: string;
@@ -7,7 +7,7 @@ export type FriendCard = {
   giftIdea: string[];
 };
 
-export const MockFriendsData: FriendCard[] = [
+export const MockFriendsData: Friend[] = [
   {
     id: 1,
     name: "Alice Johnson",

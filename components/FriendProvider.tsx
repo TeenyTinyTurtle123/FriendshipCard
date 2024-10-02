@@ -1,10 +1,10 @@
 import { createContext, PropsWithChildren, useContext } from "react";
-import { FriendCard } from "../data";
+import { Friend } from "../data";
 import useAsyncStore from "../Hooks/useAsyncStorage";
 
 interface ContextValue {
-  friendList: FriendCard[];
-  addFriend: (friend: FriendCard) => void;
+  friendList: Friend[];
+  addFriend: (friend: Friend) => void;
   removeFriend: (id: number) => void;
 }
 
@@ -12,10 +12,10 @@ export const FriendContext = createContext<ContextValue>({} as ContextValue);
 
 export default function FriendProvider({ children }: PropsWithChildren) {
   // Async Storage saker
-  const [friends, setFriends] = useAsyncStore<FriendCard[]>("friends", []);
+  const [friends, setFriends] = useAsyncStore<Friend[]>("friends", []);
 
   // uppdaterar listan med ett nytt moment
-  const addFriend = (newFriend: FriendCard) => {
+  const addFriend = (newFriend: Friend) => {
     const updateFriends = [...friends, newFriend];
     setFriends(updateFriends);
   };

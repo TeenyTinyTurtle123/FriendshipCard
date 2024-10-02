@@ -1,5 +1,5 @@
-import { Image } from "expo-image";
-import { Alert, Button, Text, View } from "react-native";
+import { Alert, Button, View } from "react-native";
+import FriendCard from "../components/FriendCard";
 import { useFriendProvider } from "../components/FriendProvider";
 
 export default function FriendDetailsScreen({ route }: any) {
@@ -15,13 +15,16 @@ export default function FriendDetailsScreen({ route }: any) {
   };
   return (
     <View>
-      <Text>Friend ID: {id}</Text>
+      {/* <Text>Friend ID: {id}</Text>
       <Text>Friend Name: {friend?.name}</Text>
       <Image source={friend?.image} style={{ width: 200, height: 200 }} />
       <Text>Friend Details</Text>
       <Text>Friend relation: {friend?.relation}</Text>
       <Text>Likes: {friend?.likes.join(" ")}</Text>
-      <Text>Gift ides: {friend?.giftIdea.join(" ")}</Text>
+      <Text>Gift ides: {friend?.giftIdea.join(" ")}</Text> */}
+
+      {friend && <FriendCard friend={friend} />}
+
       <Button title="Delete" onPress={() => handleRemoveFriend()} />
     </View>
   );

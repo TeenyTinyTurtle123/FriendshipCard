@@ -1,13 +1,13 @@
 import { Image } from "expo-image";
 import { Button, ScrollView, Text, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
-import { FriendCard } from "../data";
+import { Friend } from "../data";
 
 export default function HomeScreen({ navigation }: any) {
   const { friendList, addFriend, removeFriend } = useFriendProvider();
 
   const handleAddAFriend = () => {
-    const newFriend: FriendCard = {
+    const newFriend: Friend = {
       id: Date.now(), // Generate a unique ID
       name: "Sunny Andersson",
       relation: "Acquaintance",

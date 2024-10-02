@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
 import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
-import { FriendCard } from "../data";
+import { Friend } from "../data";
 
 export default function CreateFriend() {
   const { friendList, addFriend } = useFriendProvider();
@@ -24,7 +24,7 @@ export default function CreateFriend() {
   }
 
   const handleAddFriend = () => {
-    const newFriend: FriendCard = {
+    const newFriend: Friend = {
       id: generateRandomID(),
       name,
       relation,

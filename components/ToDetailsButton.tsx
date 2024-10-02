@@ -7,11 +7,7 @@ export default function ToDetailsButton({ friend, navigation }: any) {
       onPress={() => navigation.navigate("Details", { id: friend.id })}
     >
       <View style={s.container}>
-        <Image
-          source={require("../assets/images/default.jpg")}
-          style={s.image}
-          blurRadius={50}
-        />
+        <Image source={friend.image} style={s.image} blurRadius={10} />
         <Text style={s.text}>{friend.name}</Text>
       </View>
     </Pressable>

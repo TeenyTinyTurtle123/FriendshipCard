@@ -1,5 +1,5 @@
-import { Alert, Button, Image, Text, View } from "react-native";
-import { resolveImage } from "../App";
+import { Image } from "expo-image";
+import { Alert, Button, Text, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
 
 export default function FriendDetailsScreen({ route }: any) {
@@ -17,10 +17,7 @@ export default function FriendDetailsScreen({ route }: any) {
     <View>
       <Text>Friend ID: {id}</Text>
       <Text>Friend Name: {friend?.name}</Text>
-      <Image
-        source={resolveImage(friend?.image ?? "default.jpg")}
-        style={{ width: 200, height: 200 }}
-      />
+      <Image source={friend?.image} style={{ width: 200, height: 200 }} />
       <Text>Friend Details</Text>
       <Text>Friend relation: {friend?.relation}</Text>
       <Text>Likes: {friend?.likes.join(" ")}</Text>

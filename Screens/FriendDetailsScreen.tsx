@@ -1,6 +1,7 @@
-import { Alert, Button, View } from "react-native";
+import { Alert, ScrollView } from "react-native";
 import FriendCard from "../components/FriendCard";
 import { useFriendProvider } from "../components/FriendProvider";
+import TextColorButton from "../components/TextColorButton";
 
 export default function FriendDetailsScreen({ route }: any) {
   const { friendList, removeFriend } = useFriendProvider();
@@ -14,18 +15,15 @@ export default function FriendDetailsScreen({ route }: any) {
     Alert.alert(friend?.name + " has been deleted.");
   };
   return (
-    <View>
-      {/* <Text>Friend ID: {id}</Text>
-      <Text>Friend Name: {friend?.name}</Text>
-      <Image source={friend?.image} style={{ width: 200, height: 200 }} />
-      <Text>Friend Details</Text>
-      <Text>Friend relation: {friend?.relation}</Text>
-      <Text>Likes: {friend?.likes.join(" ")}</Text>
-      <Text>Gift ides: {friend?.giftIdea.join(" ")}</Text> */}
-
+    <ScrollView>
       {friend && <FriendCard friend={friend} />}
 
-      <Button title="Delete" onPress={() => handleRemoveFriend()} />
-    </View>
+      <TextColorButton
+        title="Update"
+        bgColor="#7cdcde"
+        onPress={handleRemoveFriend}
+      />
+      <TextColorButton title="Delete" onPress={handleRemoveFriend} />
+    </ScrollView>
   );
 }

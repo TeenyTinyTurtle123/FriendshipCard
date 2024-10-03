@@ -11,3 +11,6 @@ used: CreateFriend
 
 SafeAreaContext - https://docs.expo.dev/versions/latest/sdk/safe-area-context/
 used: all screens
+
+Picker - https://docs.expo.dev/versions/latest/sdk/picker/
+used: CreateFriendScreen

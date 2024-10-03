@@ -1,3 +1,4 @@
+import { Picker } from "@react-native-picker/picker";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
@@ -71,12 +72,23 @@ export default function CreateFriendScreen() {
           onChangeText={setName}
         />
         <Text style={s.textTitle}>Relationship</Text>
-        <TextInput
-          style={s.textInput}
-          placeholder="friend, brother ..."
-          value={relation}
-          onChangeText={setRelation}
-        />
+        <Picker
+          selectedValue={relation}
+          onValueChange={(itemValue) => setRelation(itemValue)}
+        >
+          <Picker.Item label="Friend" value="Friend" />
+          <Picker.Item label="Best Friend" value="Best Friend" />
+          <Picker.Item label="Acquaintance" value="Acquaintance" />
+          <Picker.Item label="NPC" value="NPC" />
+          <Picker.Item label="Coworker" value="Coworker" />
+          <Picker.Item label="Mother" value="Mother" />
+          <Picker.Item label="Father" value="Father" />
+          <Picker.Item label="Sister" value="Sister" />
+          <Picker.Item label="Brother" value="Brother" />
+          <Picker.Item label="Sibling" value="Sibling" />
+          <Picker.Item label="Grandmother" value="Grandmother" />
+          <Picker.Item label="Grandfather" value="Grandmother" />
+        </Picker>
 
         <Text style={s.textTitle}>
           Likes (separate each new thing with a ', ')

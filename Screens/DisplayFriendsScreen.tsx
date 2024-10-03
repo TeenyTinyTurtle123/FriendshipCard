@@ -1,8 +1,12 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
 import ToDetailsButton from "../components/ToDetailsButton";
+import { TabParamList } from "../Navigators/TabNavigator";
 
-export default function DisplayFriendsScreen({ navigation }: any) {
+type DisplayProps = NativeStackScreenProps<TabParamList, "Display">;
+
+export default function DisplayFriendsScreen({ navigation }: DisplayProps) {
   const { friendList } = useFriendProvider();
 
   console.log(friendList.length);

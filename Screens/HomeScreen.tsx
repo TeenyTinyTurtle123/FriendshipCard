@@ -1,10 +1,14 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Image } from "expo-image";
 import { Button, ScrollView, Text, View } from "react-native";
 import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
 import { Friend } from "../data";
+import { TabParamList } from "../Navigators/TabNavigator";
 
-export default function HomeScreen({ navigation }: any) {
+type HomeProps = NativeStackScreenProps<TabParamList, "Home">;
+
+export default function HomeScreen({ navigation }: HomeProps) {
   const { friendList, addFriend, removeFriend } = useFriendProvider();
 
   const handleAddAFriend = () => {

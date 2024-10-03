@@ -1,9 +1,13 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Alert, ScrollView } from "react-native";
 import FriendCard from "../components/FriendCard";
 import { useFriendProvider } from "../components/FriendProvider";
 import TextColorButton from "../components/TextColorButton";
+import { RootStackParamList } from "../Navigators/RootStack";
 
-export default function FriendDetailsScreen({ route }: any) {
+type DetailsProps = NativeStackScreenProps<RootStackParamList, "Details">;
+
+export default function FriendDetailsScreen({ route }: DetailsProps) {
   const { friendList, removeFriend } = useFriendProvider();
 
   const { id } = route.params;
@@ -18,11 +22,7 @@ export default function FriendDetailsScreen({ route }: any) {
     <ScrollView>
       {friend && <FriendCard friend={friend} />}
 
-      <TextColorButton
-        title="Update"
-        bgColor="#7cdcde"
-        onPress={handleRemoveFriend}
-      />
+      <TextColorButton title="Update" bgColor="#7cdcde" onPress={() => {}} />
       <TextColorButton title="Delete" onPress={handleRemoveFriend} />
     </ScrollView>
   );

@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import defaultImage from "../assets/images/flowerDefault.jpg";
 
 export default function ToDetailsButton({ friend, navigation }: any) {
   return (
@@ -7,7 +8,11 @@ export default function ToDetailsButton({ friend, navigation }: any) {
       onPress={() => navigation.navigate("Details", { id: friend.id })}
     >
       <View style={s.container}>
-        <Image source={friend.image} style={s.image} blurRadius={10} />
+        <Image
+          source={friend.image ?? defaultImage} //TODO: blur effect not working on default
+          style={s.image}
+          blurRadius={10}
+        />
         <Text style={s.text}>{friend.name}</Text>
       </View>
     </Pressable>
@@ -16,10 +21,12 @@ export default function ToDetailsButton({ friend, navigation }: any) {
 
 const s = StyleSheet.create({
   container: {
-    width: 200,
-    height: 200,
+    width: "100%",
+    aspectRatio: 1,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 10,
+    overflow: "hidden",
   },
   image: {
     width: "100%",
@@ -29,5 +36,6 @@ const s = StyleSheet.create({
     position: "absolute",
     fontSize: 24,
     fontWeight: "bold",
+    color: "white",
   },
 });

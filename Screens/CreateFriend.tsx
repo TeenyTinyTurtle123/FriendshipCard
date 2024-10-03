@@ -30,7 +30,7 @@ export default function CreateFriend() {
       relation,
       likes: likes.split(",").map((like) => like.trim()), // Convert the likes string into an array
       giftIdea: giftIdeas.split(",").map((gift) => gift.trim()), // Convert the gift ideas string into an array
-      image: image ? { uri: image } : defaultImage, // TODO: add a placeholder image if no image is selected
+      image: image ? { uri: image } : defaultImage,
     };
 
     addFriend(newFriend);

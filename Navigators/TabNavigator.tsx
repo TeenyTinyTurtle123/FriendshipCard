@@ -15,7 +15,10 @@ const TabNav = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   return (
-    <TabNav.Navigator initialRouteName="Home">
+    <TabNav.Navigator
+      initialRouteName="Home"
+      screenOptions={{ tabBarActiveTintColor: "#008080" }}
+    >
       <TabNav.Screen
         name="Create"
         options={{

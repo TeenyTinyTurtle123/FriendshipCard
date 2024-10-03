@@ -108,7 +108,9 @@ export default function CreateFriend() {
 
 const s = StyleSheet.create({
   container: {
-    margin: 10,
+    flex: 1,
+    backgroundColor: "#aae8d8",
+    padding: 10,
   },
 
   headlineTextContainer: {
@@ -134,6 +136,7 @@ const s = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     marginBottom: 5,
+    backgroundColor: "white",
   },
 
   imageContainer: {

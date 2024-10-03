@@ -30,6 +30,8 @@ const s = StyleSheet.create({
     flexWrap: "wrap", // Allow wrapping to next line
     justifyContent: "space-between", // Space evenly between rows
     padding: 10, // Add some padding to the sides
+    flex: 1,
+    backgroundColor: "#aae8d8",
   },
   gridItem: {
     flexBasis: "48%", // Each item takes up almost half of the row

@@ -6,6 +6,10 @@ export type Friend = {
   likes: string[];
   giftIdea: string[];
 };
+// The color I use:
+// primary: #008080
+// secondly: #6ebeb5
+// background: #aae8d8
 
 // ======== används inte just nu ========0
 export const MockFriendsData: Friend[] = [

@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Alert, ScrollView } from "react-native";
+import { Alert, ScrollView, StyleSheet } from "react-native";
 import FriendCard from "../components/FriendCard";
 import { useFriendProvider } from "../components/FriendProvider";
 import TextColorButton from "../components/TextColorButton";
@@ -19,11 +19,18 @@ export default function FriendDetailsScreen({ route }: DetailsProps) {
     Alert.alert(friend?.name + " has been deleted.");
   };
   return (
-    <ScrollView>
+    <ScrollView style={s.container}>
       {friend && <FriendCard friend={friend} />}
 
-      <TextColorButton title="Update" bgColor="#7cdcde" onPress={() => {}} />
+      <TextColorButton title="Update" bgColor="#6ebeb5" onPress={() => {}} />
       <TextColorButton title="Delete" onPress={handleRemoveFriend} />
     </ScrollView>
   );
 }
+
+const s = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#aae8d8",
+  },
+});

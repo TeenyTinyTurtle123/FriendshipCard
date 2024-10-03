@@ -95,13 +95,6 @@ export default function CreateFriend() {
         value={giftIdeas}
         onChangeText={seGiftIdeas}
       />
-
-      {/* <TextInput
-        style={s.textInput}
-        placeholder="image url"
-        value={image}
-        onChangeText={setImage}
-        /> */}
       <View style={s.imageContainer}>
         <Text style={s.textTitle}>Add a picture (optional)</Text>
         {image && <Image source={{ uri: image }} style={s.image} />}

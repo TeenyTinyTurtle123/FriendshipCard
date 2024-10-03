@@ -1,54 +1,71 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Image } from "expo-image";
-import { Button, ScrollView, Text, View } from "react-native";
-import defaultImage from "../assets/images/flowerDefault.jpg";
-import { useFriendProvider } from "../components/FriendProvider";
-import { Friend } from "../data";
-import { TabParamList } from "../Navigators/TabNavigator";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-type HomeProps = NativeStackScreenProps<TabParamList, "Home">;
-
-export default function HomeScreen({ navigation }: HomeProps) {
-  const { friendList, addFriend, removeFriend } = useFriendProvider();
-
-  const handleAddAFriend = () => {
-    const newFriend: Friend = {
-      id: Date.now(), // Generate a unique ID
-      name: "Sunny Andersson",
-      relation: "Acquaintance",
-      likes: ["Music", "Sports"],
-      giftIdea: ["Concert tickets"],
-      image: defaultImage,
-    };
-
-    addFriend(newFriend);
-  };
-
-  const handleRemoveFriend = (id: number) => {
-    removeFriend(id);
-  };
-
+export default function HomeScreen() {
   return (
-    <ScrollView>
-      <Button
-        title="Go to Display ❤️"
-        onPress={() => navigation.navigate("Display")}
-      ></Button>
+    <View style={s.container}>
+      <Text style={s.header}>Welcome to FriendshipCard! 🎉</Text>
 
-      <Text>Friends: </Text>
-      {friendList.map((friend) => (
-        <View key={friend.id}>
-          <Text>
-            {friend.name} {friend.relation} {friend.likes}
-          </Text>
-          <Image source={friend.image} style={{ width: 200, height: 200 }} />
-          <Button
-            title="Remove friend"
-            onPress={() => handleRemoveFriend(friend.id)}
-          />
-        </View>
-      ))}
-      <Button title="Add new friend" onPress={handleAddAFriend} />
-    </ScrollView>
+      <Text style={s.description}>
+        Keeping track of your friends' favorite things has never been easier.
+        Whether it's their hobbies, interests, or gift ideas, you'll always be
+        ready to make their day special.
+      </Text>
+
+      <View style={s.instructionContainer}>
+        <MaterialIcons name="create" size={24} color="black" />
+        <Text style={s.instructionText}>
+          <Text style={s.boldText}>Create a new friend card</Text> by tapping
+          the <Text style={s.iconText}>pen icon</Text>. Fill it with details
+          about your friend’s likes, relations, and gift ideas.
+        </Text>
+      </View>
+
+      <View style={s.instructionContainer}>
+        <MaterialIcons name="favorite" size={24} color="black" />
+        <Text style={s.instructionText}>
+          <Text style={s.boldText}>View your friend list</Text> by pressing the{" "}
+          <Text style={s.iconText}>heart icon</Text>. See all your saved cards
+          at a glance and never forget what your friends love.
+        </Text>
+      </View>
+    </View>
   );
 }
+
+const s = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#aae8d8",
+    padding: 20,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+  },
+  description: {
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  instructionContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 15,
+    padding: 8,
+  },
+  instructionText: {
+    fontSize: 16,
+    marginLeft: 13, // Spacing between icon and text
+  },
+  boldText: {
+    fontWeight: "bold",
+  },
+  iconText: {
+    fontStyle: "italic",
+    color: "#008080",
+  },
+});

@@ -7,6 +7,7 @@ export type Friend = {
   giftIdea: string[];
 };
 
+// ======== används inte just nu ========0
 export const MockFriendsData: Friend[] = [
   {
     id: 1,

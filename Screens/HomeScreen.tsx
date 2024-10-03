@@ -1,10 +1,10 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View style={s.container}>
+    <SafeAreaView style={s.container}>
       <Text style={s.header}>Welcome to FriendshipCard! 🎉</Text>
 
       <Text style={s.description}>
@@ -30,7 +30,7 @@ export default function HomeScreen() {
           at a glance and never forget what your friends love.
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

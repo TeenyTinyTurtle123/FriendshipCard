@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Alert, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import FriendCard from "../components/FriendCard";
 import { useFriendProvider } from "../components/FriendProvider";
 import TextColorButton from "../components/TextColorButton";
@@ -20,10 +21,12 @@ export default function FriendDetailsScreen({ route }: DetailsProps) {
   };
   return (
     <ScrollView style={s.container}>
-      {friend && <FriendCard friend={friend} />}
+      <SafeAreaView>
+        {friend && <FriendCard friend={friend} />}
 
-      <TextColorButton title="Update" bgColor="#6ebeb5" onPress={() => {}} />
-      <TextColorButton title="Delete" onPress={handleRemoveFriend} />
+        <TextColorButton title="Update" bgColor="#6ebeb5" onPress={() => {}} />
+        <TextColorButton title="Delete" onPress={handleRemoveFriend} />
+      </SafeAreaView>
     </ScrollView>
   );
 }

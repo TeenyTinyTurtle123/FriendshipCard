@@ -1,7 +1,7 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import CreateFriend from "../Screens/CreateFriend";
+import CreateFriendScreen from "../Screens/CreateFriendScreen";
 import DisplayFriendsScreen from "../Screens/DisplayFriendsScreen";
 import HomeScreen from "../Screens/HomeScreen";
 
@@ -26,7 +26,7 @@ export default function TabNavigator() {
             <MaterialIcons name="create" size={size} color={color} />
           ),
         }}
-        component={CreateFriend}
+        component={CreateFriendScreen}
       />
       <TabNav.Screen
         name="Home"

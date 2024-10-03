@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
 import { useFriendProvider } from "../components/FriendProvider";
 import ToDetailsButton from "../components/ToDetailsButton";
 import { TabParamList } from "../Navigators/TabNavigator";
@@ -13,13 +13,13 @@ export default function DisplayFriendsScreen({ navigation }: DisplayProps) {
 
   return (
     <ScrollView>
-      <View style={s.gridContainer}>
+      <SafeAreaView style={s.gridContainer}>
         {friendList.map((friend) => (
           <View key={friend.id} style={s.gridItem}>
             <ToDetailsButton friend={friend} navigation={navigation} />
           </View>
         ))}
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 }

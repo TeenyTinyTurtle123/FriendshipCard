@@ -9,14 +9,15 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
 import generateRandomID from "../components/GenerateRandomID";
 import TextColorButton from "../components/TextColorButton";
 import { Friend } from "../data";
 
-export default function CreateFriend() {
-  const { friendList, addFriend } = useFriendProvider();
+export default function CreateFriendScreen() {
+  const { addFriend } = useFriendProvider();
 
   // state for form input:
   const [name, setName] = useState("");
@@ -57,51 +58,53 @@ export default function CreateFriend() {
 
   return (
     <ScrollView style={s.container}>
-      <View style={s.headlineTextContainer}>
-        <Text style={s.headlineText}>Create a new friend card ✨</Text>
-      </View>
+      <SafeAreaView>
+        <View style={s.headlineTextContainer}>
+          <Text style={s.headlineText}>Create a new friend card ✨</Text>
+        </View>
 
-      <Text style={s.textTitle}>Name of person</Text>
-      <TextInput
-        style={s.textInput}
-        placeholder="name"
-        value={name}
-        onChangeText={setName}
-      />
-      <Text style={s.textTitle}>Relationship</Text>
-      <TextInput
-        style={s.textInput}
-        placeholder="friend, brother ..."
-        value={relation}
-        onChangeText={setRelation}
-      />
+        <Text style={s.textTitle}>Name of person</Text>
+        <TextInput
+          style={s.textInput}
+          placeholder="name"
+          value={name}
+          onChangeText={setName}
+        />
+        <Text style={s.textTitle}>Relationship</Text>
+        <TextInput
+          style={s.textInput}
+          placeholder="friend, brother ..."
+          value={relation}
+          onChangeText={setRelation}
+        />
 
-      <Text style={s.textTitle}>
-        Likes (separate each new thing with a ', ')
-      </Text>
-      <TextInput
-        style={s.textInput}
-        placeholder="green socks, cats, pancakes ..."
-        value={likes}
-        onChangeText={setLikes}
-      />
+        <Text style={s.textTitle}>
+          Likes (separate each new thing with a ', ')
+        </Text>
+        <TextInput
+          style={s.textInput}
+          placeholder="green socks, cats, pancakes ..."
+          value={likes}
+          onChangeText={setLikes}
+        />
 
-      <Text style={s.textTitle}>
-        Gift ideas (separate each new thing with a ' , ')
-      </Text>
-      <TextInput
-        style={s.textInput}
-        placeholder="Trip to Liseberg, limited edition frog  ..."
-        value={giftIdeas}
-        onChangeText={seGiftIdeas}
-      />
-      <View style={s.imageContainer}>
-        <Text style={s.textTitle}>Add a picture (optional)</Text>
-        {image && <Image source={{ uri: image }} style={s.image} />}
+        <Text style={s.textTitle}>
+          Gift ideas (separate each new thing with a ' , ')
+        </Text>
+        <TextInput
+          style={s.textInput}
+          placeholder="Trip to Liseberg, limited edition frog  ..."
+          value={giftIdeas}
+          onChangeText={seGiftIdeas}
+        />
+        <View style={s.imageContainer}>
+          <Text style={s.textTitle}>Add a picture (optional)</Text>
+          {image && <Image source={{ uri: image }} style={s.image} />}
 
-        <TextColorButton title="OPEN LIBRARY" onPress={pickImage} />
-      </View>
-      <TextColorButton title="Add" onPress={handleAddFriend} />
+          <TextColorButton title="OPEN LIBRARY" onPress={pickImage} />
+        </View>
+        <TextColorButton title="Add" onPress={handleAddFriend} />
+      </SafeAreaView>
     </ScrollView>
   );
 }

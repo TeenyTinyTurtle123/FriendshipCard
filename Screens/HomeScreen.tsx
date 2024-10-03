@@ -1,5 +1,6 @@
 import { Image } from "expo-image";
 import { Button, ScrollView, Text, View } from "react-native";
+import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
 import { Friend } from "../data";
 
@@ -13,7 +14,7 @@ export default function HomeScreen({ navigation }: any) {
       relation: "Acquaintance",
       likes: ["Music", "Sports"],
       giftIdea: ["Concert tickets"],
-      image: "",
+      image: defaultImage,
     };
 
     addFriend(newFriend);

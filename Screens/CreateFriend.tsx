@@ -1,9 +1,18 @@
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
+import generateRandomID from "../components/GenerateRandomID";
+import TextColorButton from "../components/TextColorButton";
 import { Friend } from "../data";
 
 export default function CreateFriend() {
@@ -15,13 +24,6 @@ export default function CreateFriend() {
   const [likes, setLikes] = useState("");
   const [giftIdeas, seGiftIdeas] = useState("");
   const [image, setImage] = useState("");
-
-  // Function to generate a unique ID
-  function generateRandomID() {
-    const timeComponent = Date.now();
-    const randomComponent = Math.floor(Math.random() * 100);
-    return timeComponent + randomComponent;
-  }
 
   const handleAddFriend = () => {
     const newFriend: Friend = {
@@ -37,6 +39,7 @@ export default function CreateFriend() {
     Alert.alert(newFriend.name + " was added! ✨");
   };
 
+  //TODO: add this to it's own file
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -50,18 +53,22 @@ export default function CreateFriend() {
       setImage(result.assets[0].uri);
     }
   };
+  //
 
   return (
-    <View>
-      <Text>Create a new friend card ✨</Text>
+    <ScrollView style={s.container}>
+      <View style={s.headlineTextContainer}>
+        <Text style={s.headlineText}>Create a new friend card ✨</Text>
+      </View>
 
-      <Text>Name of person:</Text>
+      <Text style={s.textTitle}>Name of person</Text>
       <TextInput
         style={s.textInput}
         placeholder="name"
         value={name}
         onChangeText={setName}
       />
+      <Text style={s.textTitle}>Relationship</Text>
       <TextInput
         style={s.textInput}
         placeholder="friend, brother ..."
@@ -69,7 +76,9 @@ export default function CreateFriend() {
         onChangeText={setRelation}
       />
 
-      <Text>Likes (separate each new thing with a ', '):</Text>
+      <Text style={s.textTitle}>
+        Likes (separate each new thing with a ', ')
+      </Text>
       <TextInput
         style={s.textInput}
         placeholder="green socks, cats, pancakes ..."
@@ -77,7 +86,9 @@ export default function CreateFriend() {
         onChangeText={setLikes}
       />
 
-      <Text>Gift ideas (separate each new thing with a ' , '):</Text>
+      <Text style={s.textTitle}>
+        Gift ideas (separate each new thing with a ' , ')
+      </Text>
       <TextInput
         style={s.textInput}
         placeholder="Trip to Liseberg, limited edition frog  ..."
@@ -85,31 +96,59 @@ export default function CreateFriend() {
         onChangeText={seGiftIdeas}
       />
 
-      <Text>Add a picture (optional)</Text>
-      <TextInput
+      {/* <TextInput
         style={s.textInput}
         placeholder="image url"
         value={image}
         onChangeText={setImage}
-      />
-      <View>
-        <Button title="Open library" onPress={pickImage} />
+        /> */}
+      <View style={s.imageContainer}>
+        <Text style={s.textTitle}>Add a picture (optional)</Text>
         {image && <Image source={{ uri: image }} style={s.image} />}
+
+        <TextColorButton title="OPEN LIBRARY" onPress={pickImage} />
       </View>
-      <Button title="Add" onPress={handleAddFriend} />
-    </View>
+      <TextColorButton title="Add" onPress={handleAddFriend} />
+    </ScrollView>
   );
 }
 
 const s = StyleSheet.create({
-  component: {},
+  container: {
+    margin: 10,
+  },
+
+  headlineTextContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  headlineText: {
+    backgroundColor: "#008080",
+    color: "white",
+    borderRadius: 10,
+    fontSize: 20,
+    padding: 5,
+    margin: 10,
+  },
+
+  textTitle: {
+    fontSize: 15,
+  },
+
   textInput: {
     borderWidth: 2,
+    borderRadius: 10,
     padding: 5,
     marginBottom: 5,
   },
+
+  imageContainer: {
+    alignItems: "center",
+  },
+
   image: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
   },
 });

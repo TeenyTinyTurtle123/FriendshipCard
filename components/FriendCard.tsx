@@ -20,9 +20,9 @@ export default function FriendCard({ friend }: Props) {
         </View>
       </View>
       <Text style={s.titleText}>Likes</Text>
-      <Text style={s.underText}>{friend.likes.join(" ")}</Text>
+      <Text style={s.underText}>{friend.likes.join(", ")}</Text>
       <Text style={s.titleText}>Gift Ideas</Text>
-      <Text style={s.underText}>{friend.giftIdea.join(" ")}</Text>
+      <Text style={s.underText}>{friend.giftIdea.join(", ")}</Text>
     </View>
   );
 }

@@ -1,8 +1,23 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function HomeScreen() {
+  const [advice, setAdvice] = useState("");
+
+  console.log(advice);
+
+  // Today's advice api
+  useEffect(() => {
+    async function adviceFetch() {
+      const url = "https://api.adviceslip.com/advice";
+      const respons = await fetch(url);
+      const data = await respons.json();
+      setAdvice(data.slip.advice);
+    }
+    adviceFetch();
+  }, []);
+
   return (
     <SafeAreaView style={s.container}>
       <Text style={s.header}>Welcome to FriendshipCard! 🎉</Text>
@@ -28,6 +43,12 @@ export default function HomeScreen() {
           <Text style={s.boldText}>View your friend list</Text> by pressing the{" "}
           <Text style={s.iconText}>heart icon</Text>. See all your saved cards
           at a glance and never forget what your friends love.
+        </Text>
+      </View>
+      <View style={s.adviceContainer}>
+        <Text style={s.adviceTitle}>Today's Advice</Text>
+        <Text style={s.adviceText}>
+          {advice ? `"${advice}"` : "Loading advice..."}
         </Text>
       </View>
     </SafeAreaView>
@@ -67,5 +88,22 @@ const s = StyleSheet.create({
   iconText: {
     fontStyle: "italic",
     color: "#008080",
+  },
+  adviceContainer: {
+    marginTop: 20,
+    borderWidth: 2,
+    padding: 5,
+    borderRadius: 10,
+    gap: 2,
+    borderColor: "#008080",
+  },
+  adviceTitle: {
+    color: "#008080",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  adviceText: {
+    fontSize: 15,
+    fontStyle: "italic",
   },
 });

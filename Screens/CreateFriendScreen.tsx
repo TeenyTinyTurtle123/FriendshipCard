@@ -26,8 +26,6 @@ const FriendCardScheme = z.object({
   giftIdeas: z.string().min(1, "Gift ideas must contain at least 1 character"),
 });
 
-export type FriendZod = z.infer<typeof FriendCardScheme>;
-
 export default function CreateFriendScreen() {
   const { addFriend } = useFriendProvider();
 
@@ -86,13 +84,10 @@ export default function CreateFriendScreen() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
-  //
 
   return (
     <ScrollView style={s.container}>

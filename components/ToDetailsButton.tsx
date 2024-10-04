@@ -9,7 +9,7 @@ export default function ToDetailsButton({ friend, navigation }: any) {
     >
       <View style={s.container}>
         <Image
-          source={friend.image ?? defaultImage} //TODO: blur effect not working on default
+          source={friend.image ?? defaultImage}
           style={s.image}
           blurRadius={10}
         />

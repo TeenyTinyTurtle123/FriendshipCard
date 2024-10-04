@@ -59,6 +59,7 @@ Används: alla screens
 ## Uppfyllda krav
 
 - Alla krav för godkänt
+
   - 4 RN-komponenter + 4 Expo komponenter
   - Komponenterna är skriva här i filen
   - React Navigation används
@@ -66,3 +67,9 @@ Används: alla screens
   - README fil finns
   - Inlämnad i tid
   - Presentation utförd
+
+- VG krav, alla utom 1
+  - Alla krav för G
+  - Pratar med ett API - https://api.adviceslip.com/#object-slip
+  - valfri extern modul - Zod - https://zod.dev/?id=introduction
+  - (ej gjord) Förbered för lansering till en Appstore

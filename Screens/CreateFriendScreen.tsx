@@ -11,11 +11,22 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { z } from "zod";
 import defaultImage from "../assets/images/flowerDefault.jpg";
 import { useFriendProvider } from "../components/FriendProvider";
 import generateRandomID from "../components/GenerateRandomID";
 import TextColorButton from "../components/TextColorButton";
 import { Friend } from "../data";
+
+// zod scheme for validation
+const FriendCardScheme = z.object({
+  name: z.string().min(1, "Name must contain at least 1 character"),
+  relation: z.string(),
+  likes: z.string().min(1, "Likes must contain at least 1 character"),
+  giftIdeas: z.string().min(1, "Gift ideas must contain at least 1 character"),
+});
+
+export type FriendZod = z.infer<typeof FriendCardScheme>;
 
 export default function CreateFriendScreen() {
   const { addFriend } = useFriendProvider();
@@ -26,8 +37,28 @@ export default function CreateFriendScreen() {
   const [likes, setLikes] = useState("");
   const [giftIdeas, seGiftIdeas] = useState("");
   const [image, setImage] = useState("");
+  const [error, setErrors] = useState<Record<string, string>>({}); // for zod validation error
 
   const handleAddFriend = () => {
+    const validationResult = FriendCardScheme.safeParse({
+      name,
+      relation,
+      likes,
+      giftIdeas,
+    });
+
+    // if validation fails, update error state
+    if (!validationResult.success) {
+      const fieldErrors: Record<string, string> = {};
+      validationResult.error.errors.forEach((error) => {
+        if (error.path[0]) {
+          fieldErrors[error.path[0] as string] = error.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
     const newFriend: Friend = {
       id: generateRandomID(),
       name,
@@ -39,6 +70,13 @@ export default function CreateFriendScreen() {
 
     addFriend(newFriend);
     Alert.alert(newFriend.name + " was added! ✨");
+
+    setName("");
+    setRelation("");
+    setLikes("");
+    seGiftIdeas("");
+    setImage("");
+    setErrors({});
   };
 
   //TODO: add this to it's own file
@@ -71,6 +109,7 @@ export default function CreateFriendScreen() {
           value={name}
           onChangeText={setName}
         />
+        {error.name && <Text style={s.errorText}>{error.name}</Text>}
         <Text style={s.textTitle}>Relationship</Text>
         <Picker
           selectedValue={relation}
@@ -89,6 +128,7 @@ export default function CreateFriendScreen() {
           <Picker.Item label="Grandmother" value="Grandmother" />
           <Picker.Item label="Grandfather" value="Grandmother" />
         </Picker>
+        {error.relation && <Text style={s.errorText}>{error.relation}</Text>}
 
         <Text style={s.textTitle}>
           Likes (separate each new thing with a ', ')
@@ -99,6 +139,7 @@ export default function CreateFriendScreen() {
           value={likes}
           onChangeText={setLikes}
         />
+        {error.likes && <Text style={s.errorText}>{error.likes}</Text>}
 
         <Text style={s.textTitle}>
           Gift ideas (separate each new thing with a ' , ')
@@ -109,6 +150,8 @@ export default function CreateFriendScreen() {
           value={giftIdeas}
           onChangeText={seGiftIdeas}
         />
+        {error.giftIdeas && <Text style={s.errorText}>{error.giftIdeas}</Text>}
+
         <View style={s.imageContainer}>
           <Text style={s.textTitle}>Add a picture (optional)</Text>
           {image && <Image source={{ uri: image }} style={s.image} />}
@@ -161,5 +204,8 @@ const s = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
+  },
+  errorText: {
+    color: "red",
   },
 });

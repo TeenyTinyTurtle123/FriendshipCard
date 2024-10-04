@@ -9,8 +9,6 @@ type DisplayProps = NativeStackScreenProps<TabParamList, "Display">;
 export default function DisplayFriendsScreen({ navigation }: DisplayProps) {
   const { friendList } = useFriendProvider();
 
-  console.log(friendList.length);
-
   return (
     <ScrollView>
       <SafeAreaView style={s.gridContainer}>

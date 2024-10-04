@@ -1,11 +1,9 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 export default function HomeScreen() {
   const [advice, setAdvice] = useState("");
-
-  console.log(advice);
 
   // Today's advice api
   useEffect(() => {

@@ -11,7 +11,6 @@ interface ContextValue {
 export const FriendContext = createContext<ContextValue>({} as ContextValue);
 
 export default function FriendProvider({ children }: PropsWithChildren) {
-  // Async Storage saker
   const [friends, setFriends] = useAsyncStore<Friend[]>("friends", []);
 
   // uppdaterar listan med ett nytt moment

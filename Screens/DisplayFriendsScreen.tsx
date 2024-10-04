@@ -26,15 +26,15 @@ export default function DisplayFriendsScreen({ navigation }: DisplayProps) {
 
 const s = StyleSheet.create({
   gridContainer: {
-    flexDirection: "row", // Align items in a row
-    flexWrap: "wrap", // Allow wrapping to next line
-    justifyContent: "space-between", // Space evenly between rows
-    padding: 10, // Add some padding to the sides
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    padding: 10,
     flex: 1,
     backgroundColor: "#aae8d8",
   },
   gridItem: {
-    flexBasis: "48%", // Each item takes up almost half of the row
-    marginBottom: 10, // Add some space between rows
+    flexBasis: "48%",
+    marginBottom: 10,
   },
 });

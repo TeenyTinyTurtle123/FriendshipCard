@@ -33,7 +33,7 @@ export default function HomeScreen() {
         <Text style={s.instructionText}>
           <Text style={s.boldText}>Create a new friend card</Text> by tapping
           the <Text style={s.iconText}>pen icon</Text>. Fill it with details
-          about your friend’s likes, relations, and gift ideas.
+          about your friend's likes, relations, and gift ideas.
         </Text>
       </View>
 
@@ -45,6 +45,7 @@ export default function HomeScreen() {
           at a glance and never forget what your friends love.
         </Text>
       </View>
+
       <View style={s.adviceContainer}>
         <Text style={s.adviceTitle}>Today's Advice</Text>
         <Text style={s.adviceText}>

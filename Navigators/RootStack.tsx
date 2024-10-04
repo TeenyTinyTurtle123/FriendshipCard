@@ -6,7 +6,6 @@ import TabNavigator, { TabParamList } from "./TabNavigator";
 export type RootStackParamList = {
   HomeNavigator: NavigatorScreenParams<TabParamList>;
   Details: { id: number };
-  //   Display: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -20,7 +19,6 @@ export default function RootStackNavigator() {
         component={TabNavigator}
       />
       <RootStack.Screen name="Details" component={FriendDetailsScreen} />
-      {/* <RootStack.Screen name="Display" component={DisplayFriendsScreen} /> */}
     </RootStack.Navigator>
   );
 }

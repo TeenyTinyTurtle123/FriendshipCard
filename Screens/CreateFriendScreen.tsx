@@ -79,7 +79,6 @@ export default function CreateFriendScreen() {
     setErrors({});
   };
 
-  //TODO: add this to it's own file
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
